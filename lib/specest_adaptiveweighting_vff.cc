@@ -22,7 +22,7 @@
 #include "config.h"
 #endif
 
-#include <gr_io_signature.h>
+#include <gnuradio/io_signature.h>
 #include <specest_adaptiveweighting_vff.h>
 
 specest_adaptiveweighting_vff_sptr
@@ -33,9 +33,9 @@ specest_make_adaptiveweighting_vff (size_t vlen, const std::vector<float> lambda
 
 
 specest_adaptiveweighting_vff::specest_adaptiveweighting_vff (size_t vlen, const std::vector<float> lambdas)
-	: gr_sync_block ("adaptiveweighting_vff",
-			gr_make_io_signature (1, -1, sizeof (float)*vlen),
-			gr_make_io_signature (1,  1, sizeof (float)*vlen)),
+	: gr::sync_block ("adaptiveweighting_vff",
+			gr::io_signature::make (1, -1, sizeof (float)*vlen),
+			gr::io_signature::make (1,  1, sizeof (float)*vlen)),
 	d_vlen(vlen),
 	d_lambdas(lambdas)
 {

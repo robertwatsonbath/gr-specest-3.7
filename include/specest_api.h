@@ -22,7 +22,7 @@
 #ifndef INCLUDED_SPECEST_API_H
 #define INCLUDED_SPECEST_API_H
 
-#include <gruel/attributes.h>
+#include <gnuradio/attributes.h>
 
 #ifdef gnuradio_specest_EXPORTS
 #  define SPECEST_API __GR_ATTR_EXPORT

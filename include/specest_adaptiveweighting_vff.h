@@ -22,7 +22,7 @@
 #define INCLUDED_SPECEST_ADAPTIVEWEIGHTING_VFF_H
 
 #include <specest_api.h>
-#include <gr_sync_block.h>
+#include <gnuradio/sync_block.h>
 
 class specest_adaptiveweighting_vff;
 
@@ -37,7 +37,7 @@ SPECEST_API specest_adaptiveweighting_vff_sptr specest_make_adaptiveweighting_vf
  * @param lambdas: the diffirent eigenvalues belonging to the eigenspectra
  *
  */
-class SPECEST_API specest_adaptiveweighting_vff : public gr_sync_block
+class SPECEST_API specest_adaptiveweighting_vff : public gr::sync_block
 {
 private:
   friend SPECEST_API specest_adaptiveweighting_vff_sptr specest_make_adaptiveweighting_vff(size_t vlen, const std::vector<float> lambdas);
