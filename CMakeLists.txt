@@ -93,15 +93,10 @@ set(GRC_BLOCKS_DIR      ${GR_PKG_DATA_DIR}/grc/blocks)
 ########################################################################
 # Find gnuradio build dependencies
 ########################################################################
-find_package(Gruel)
-find_package(GnuradioCore)
+find_package(GnuradioRuntime)
 
-if(NOT GRUEL_FOUND)
-    message(FATAL_ERROR "Gruel required to compile specest")
-endif()
-
-if(NOT GNURADIO_CORE_FOUND)
-    message(FATAL_ERROR "GnuRadio Core required to compile specest")
+if(NOT GNURADIO_RUNTIME_FOUND)
+    message(FATAL_ERROR "GnuRadioRuntime required to compile specest")
 endif()
 
 ########################################################################
