@@ -23,8 +23,8 @@
 
 #include <complex>
 #include <fftw3.h>
-#include <gr_complex.h>
-#include <gr_firdes.h>
+#include <gnuradio/gr_complex.h>
+#include <gnuradio/filter/firdes.h>
 #include <specest_api.h>
 
 class SPECEST_API specest_cyclo_fam_calcspectrum_impl

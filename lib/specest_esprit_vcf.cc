@@ -22,7 +22,7 @@
 #include "config.h"
 #endif
 
-#include <gr_io_signature.h>
+#include <gnuradio/io_signature.h>
 #include <specest_esprit_vcf.h>
 #include <specest_esprit_fortran_impl.h>
 
@@ -35,9 +35,9 @@ specest_make_esprit_vcf (unsigned int n, unsigned int m, unsigned int nsamples, 
 
 
 specest_esprit_vcf::specest_esprit_vcf (unsigned int n, unsigned int m, unsigned int nsamples, bool is_doa)
-	: gr_sync_block ("esprit_vcf",
-		gr_make_io_signature (1, 1, nsamples * sizeof (gr_complex)),
-		gr_make_io_signature (1, 1, n * sizeof (float))),
+	: gr::sync_block ("esprit_vcf",
+		gr::io_signature::make (1, 1, nsamples * sizeof (gr_complex)),
+		gr::io_signature::make (1, 1, n * sizeof (float))),
 	d_n(n),
 	d_m(m),
 	d_nsamples(nsamples),

@@ -2,7 +2,7 @@
 #define _SPECESTI_CORREST_H
 
 #include <armadillo>
-#include <gr_complex.h>
+#include <gnuradio/gr_complex.h>
 
 namespace specest_impl
 {

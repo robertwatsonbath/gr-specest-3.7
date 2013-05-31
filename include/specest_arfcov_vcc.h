@@ -22,7 +22,7 @@
 #define INCLUDED_SPECEST_ARFCOV_VCC_H
 
 #include <specest_api.h>
-#include <gr_sync_block.h>
+#include <gnuradio/sync_block.h>
 #include <specest_arfcov_impl.h>
 
 
@@ -47,7 +47,7 @@ SPECEST_API specest_make_arfcov_vcc (unsigned blocklen, unsigned order, int norm
  *
  * \ingroup specest
  */
-class SPECEST_API specest_arfcov_vcc : public gr_sync_block
+class SPECEST_API specest_arfcov_vcc : public gr::sync_block
 {
 	friend SPECEST_API specest_arfcov_vcc_sptr specest_make_arfcov_vcc (unsigned blocklen, unsigned order, int normalise);
 

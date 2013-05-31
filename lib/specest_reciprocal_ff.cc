@@ -23,7 +23,7 @@
 #endif
 
 #include <specest_reciprocal_ff.h>
-#include <gr_io_signature.h>
+#include <gnuradio/io_signature.h>
 
 
 specest_reciprocal_ff_sptr
@@ -34,9 +34,9 @@ specest_make_reciprocal_ff (int vlen)
 
 
 specest_reciprocal_ff::specest_reciprocal_ff (int vlen)
-	: gr_sync_block ("reciprocal_ff",
-			gr_make_io_signature (1, 1, vlen * sizeof(float)),
-			gr_make_io_signature (1, 1, vlen * sizeof(float))),
+	: gr::sync_block ("reciprocal_ff",
+			gr::io_signature::make (1, 1, vlen * sizeof(float)),
+			gr::io_signature::make (1, 1, vlen * sizeof(float))),
 	d_vlen(vlen)
 {
 }

@@ -18,7 +18,7 @@
  */
 
 #include <specest_api.h>
-#include <gr_complex.h>
+#include <gnuradio/gr_complex.h>
 
 
 

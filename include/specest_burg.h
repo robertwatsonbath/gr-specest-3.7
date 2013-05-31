@@ -22,11 +22,11 @@
 #define INCLUDED_SPECEST_BURG_H
 
 #include <specest_api.h>
-#include <gr_hier_block2.h>
-#include <gr_fft_vcc.h>
-#include <gr_complex_to_xxx.h>
-#include <gr_keep_one_in_n.h>
-#include <gr_firdes.h>
+#include <gnuradio/hier_block2.h>
+#include <gnuradio/fft/fft_vcc.h>
+#include <gnuradio/blocks/complex_to_mag_squared.h>
+#include <gnuradio/blocks/keep_one_in_n.h>
+#include <gnuradio/filter/firdes.h>
 #include <specest_reciprocal_ff.h>
 #include <specest_arburg_vcc.h>
 #include <specest_stream_to_vector_overlap.h>
@@ -56,7 +56,7 @@ SPECEST_API specest_make_burg(unsigned block_len,
  *
  * \ingroup specest
  */
-class SPECEST_API specest_burg : public gr_hier_block2
+class SPECEST_API specest_burg : public gr::hier_block2
 {
  private:
 	friend SPECEST_API specest_burg_sptr specest_make_burg(unsigned block_len,
@@ -80,11 +80,11 @@ class SPECEST_API specest_burg : public gr_hier_block2
 					int decimation);
 
 	specest_stream_to_vector_overlap_sptr d_stream_to_vector;
-	gr_keep_one_in_n_sptr d_keep_one_in_n;
+	gr::blocks::keep_one_in_n::sptr d_keep_one_in_n;
 	specest_arburg_vcc_sptr d_arburg;
 	specest_pad_vector_sptr d_pad_vector;
-	gr_fft_vcc_sptr d_fft;
-	gr_complex_to_mag_squared_sptr d_mag_square;
+	gr::fft::fft_vcc::sptr d_fft;
+	gr::blocks::complex_to_mag_squared::sptr d_mag_square;
 	specest_reciprocal_ff_sptr d_divide;
 
  public:

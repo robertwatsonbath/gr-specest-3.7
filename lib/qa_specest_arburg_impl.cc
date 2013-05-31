@@ -21,7 +21,7 @@
 #include <stdexcept>
 #include <iostream>
 #include <cmath>
-#include <gr_complex.h>
+#include <gnuradio/gr_complex.h>
 #include <boost/test/unit_test.hpp>
 #include <specest_arburg_impl.h>
 

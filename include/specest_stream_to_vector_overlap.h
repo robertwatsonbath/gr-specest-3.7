@@ -24,7 +24,7 @@
 #define INCLUDED_SPECEST_STREAM_TO_VECTOR_OVERLAP_H
 
 #include <specest_api.h>
-#include <gr_sync_decimator.h>
+#include <gnuradio/sync_decimator.h>
 
 class SPECEST_API specest_stream_to_vector_overlap;
 typedef boost::shared_ptr<specest_stream_to_vector_overlap> specest_stream_to_vector_overlap_sptr;
@@ -40,7 +40,7 @@ SPECEST_API specest_make_stream_to_vector_overlap (size_t item_size, size_t nite
  * block is prepended with \p overlap zeros to ensure synchronicity.
  * \ingroup converter
  */
-class SPECEST_API specest_stream_to_vector_overlap : public gr_sync_decimator
+class SPECEST_API specest_stream_to_vector_overlap : public gr::sync_decimator
 {
   friend SPECEST_API specest_stream_to_vector_overlap_sptr
     specest_make_stream_to_vector_overlap (size_t item_size, size_t nitems_per_block, unsigned overlap);

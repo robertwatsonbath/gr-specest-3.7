@@ -20,7 +20,7 @@
 #ifndef INCLUDED_SPECESTI_ESPRIT_H
 #define INCLUDED_SPECESTI_ESPRIT_H
 
-#include <gr_complex.h>
+#include <gnuradio/gr_complex.h>
 #include <specest_api.h>
 
 class SPECEST_API specest_esprit_impl

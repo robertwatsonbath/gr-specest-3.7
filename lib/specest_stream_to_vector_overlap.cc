@@ -26,7 +26,7 @@
 
 #include <stdexcept>
 #include <cstring>
-#include <gr_io_signature.h>
+#include <gnuradio/io_signature.h>
 #include <specest_stream_to_vector_overlap.h>
 
 specest_stream_to_vector_overlap_sptr
@@ -36,9 +36,9 @@ specest_make_stream_to_vector_overlap (size_t item_size, size_t nitems_per_block
 }
 
 specest_stream_to_vector_overlap::specest_stream_to_vector_overlap (size_t item_size, size_t nitems_per_block, unsigned overlap)
-  : gr_sync_decimator ("stream_to_vector_overlap",
-		       gr_make_io_signature (1, 1, item_size),
-		       gr_make_io_signature (1, 1, item_size * nitems_per_block),
+  : gr::sync_decimator ("stream_to_vector_overlap",
+		       gr::io_signature::make (1, 1, item_size),
+		       gr::io_signature::make (1, 1, item_size * nitems_per_block),
 		       nitems_per_block - overlap),
 	d_bytes_overlap(overlap * item_size)
 {

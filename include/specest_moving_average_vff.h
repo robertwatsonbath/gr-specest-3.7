@@ -26,7 +26,7 @@
 #define INCLUDED_SPECEST_MOVING_AVERAGE_VFF_H
 
 #include <specest_api.h>
-#include <gr_sync_block.h>
+#include <gnuradio/sync_block.h>
 
 class SPECEST_API specest_moving_average_vff;
 
@@ -44,7 +44,7 @@ SPECEST_API specest_moving_average_vff_sptr specest_make_moving_average_vff (int
  *
  * \ingroup filter
  */
-class SPECEST_API specest_moving_average_vff : public gr_sync_block
+class SPECEST_API specest_moving_average_vff : public gr::sync_block
 {
 private:
   friend SPECEST_API specest_moving_average_vff_sptr specest_make_moving_average_vff(int length, int vlen, float scale, int max_iter);

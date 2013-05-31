@@ -22,7 +22,7 @@
 #define INCLUDED_SPECEST_ESPRIT_VCF_H
 
 #include <specest_api.h>
-#include <gr_sync_block.h>
+#include <gnuradio/sync_block.h>
 #include <specest_esprit_impl.h>
 
 class specest_esprit_vcf;
@@ -34,7 +34,7 @@ SPECEST_API specest_esprit_vcf_sptr specest_make_esprit_vcf (unsigned int n, uns
  * \brief
  *
  */
-class SPECEST_API specest_esprit_vcf : public gr_sync_block
+class SPECEST_API specest_esprit_vcf : public gr::sync_block
 {
 	friend SPECEST_API specest_esprit_vcf_sptr specest_make_esprit_vcf (unsigned int n, unsigned int m, unsigned int nsamples, bool is_doa);
 

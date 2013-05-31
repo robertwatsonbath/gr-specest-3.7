@@ -22,7 +22,7 @@
 #define INCLUDED_SPECEST_MUSIC_SPECTRUM_VCF_H
 
 #include <specest_api.h>
-#include <gr_sync_block.h>
+#include <gnuradio/sync_block.h>
 #include <specest_music_impl.h>
 
 class specest_music_spectrum_vcf;
@@ -34,7 +34,7 @@ SPECEST_API specest_music_spectrum_vcf_sptr specest_make_music_spectrum_vcf (uns
  * \brief
  *
  */
-class SPECEST_API specest_music_spectrum_vcf : public gr_sync_block
+class SPECEST_API specest_music_spectrum_vcf : public gr::sync_block
 {
 	friend SPECEST_API specest_music_spectrum_vcf_sptr specest_make_music_spectrum_vcf (unsigned int n, unsigned int m, unsigned int nsamples, unsigned int pspectrum_len);
 

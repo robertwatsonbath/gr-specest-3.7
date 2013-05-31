@@ -25,7 +25,7 @@
 #endif
 
 #include <vector>
-#include <gr_io_signature.h>
+#include <gnuradio/io_signature.h>
 #include <specest_moving_average_vff.h>
 
 specest_moving_average_vff_sptr
@@ -35,9 +35,9 @@ specest_make_moving_average_vff (int length, int vlen, float scale, int max_iter
 }
 
 specest_moving_average_vff::specest_moving_average_vff (int length, int vlen, float scale, int max_iter)
-  : gr_sync_block ("moving_average_vff",
-		   gr_make_io_signature (1, 1, sizeof (float) * vlen),
-		   gr_make_io_signature (1, 1, sizeof (float) * vlen)),
+  : gr::sync_block ("moving_average_vff",
+		   gr::io_signature::make (1, 1, sizeof (float) * vlen),
+		   gr::io_signature::make (1, 1, sizeof (float) * vlen)),
     d_length(length),
     d_vlen(vlen),
     d_scale(scale),

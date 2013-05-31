@@ -22,7 +22,7 @@
 #include "config.h"
 #endif
 
-#include <gr_io_signature.h>
+#include <gnuradio/io_signature.h>
 #include <specest_cyclo_fam.h>
 #include <stdexcept>
 
@@ -96,11 +96,11 @@ specest_make_cyclo_fam (float fs, float df, float dalpha, float q)
 
 
 specest_cyclo_fam::specest_cyclo_fam (int Np, int P, int L)
-	: gr_hier_block2 ("cyclo_fam",
-		         gr_make_io_signature (1, 1, sizeof(gr_complex)),
-		         gr_make_io_signature (1, 1, sizeof(float)*(2*Np))),
+	: gr::hier_block2 ("cyclo_fam",
+		         gr::io_signature::make (1, 1, sizeof(gr_complex)),
+		         gr::io_signature::make (1, 1, sizeof(float)*(2*Np))),
  	d_stream_to_vector(specest_make_stream_to_vector_overlap(sizeof(gr_complex), Np, Np-L)),
-	d_Np_fft(gr_make_fft_vcc(Np, true, gr_firdes::window(gr_firdes::WIN_HAMMING, Np, 0), false)),
+	d_Np_fft(gr::fft::fft_vcc::make(Np, true, gr::filter::firdes::window(gr::filter::firdes::WIN_HAMMING, Np, 0), false)),
 	d_calcspectrum(specest_make_cyclo_fam_calcspectrum_vcf(Np, P, L))
 {
     connect(self(), 0, d_stream_to_vector, 0);
@@ -111,11 +111,11 @@ specest_cyclo_fam::specest_cyclo_fam (int Np, int P, int L)
 
 
 specest_cyclo_fam::specest_cyclo_fam (int Np, int P, int L, float fs)
-	: gr_hier_block2 ("cyclo_fam",
-		         gr_make_io_signature (1, 1, sizeof(gr_complex)),
-		         gr_make_io_signature (1, 1, sizeof(float)*(2*Np))),
+	: gr::hier_block2 ("cyclo_fam",
+		         gr::io_signature::make (1, 1, sizeof(gr_complex)),
+		         gr::io_signature::make (1, 1, sizeof(float)*(2*Np))),
  	d_stream_to_vector(specest_make_stream_to_vector_overlap(sizeof(gr_complex), Np, Np-L)),
-	d_Np_fft(gr_make_fft_vcc(Np, true, gr_firdes::window(gr_firdes::WIN_HAMMING, Np, 0), false)),
+	d_Np_fft(gr::fft::fft_vcc::make(Np, true, gr::filter::firdes::window(gr::filter::firdes::WIN_HAMMING, Np, 0), false)),
 	d_calcspectrum(specest_make_cyclo_fam_calcspectrum_vcf(Np, P, L))
 {
     d_fs = fs;

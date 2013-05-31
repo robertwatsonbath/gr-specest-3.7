@@ -20,7 +20,7 @@
 
 #include <specest_pad_vector.h>
 #include <cstring>
-#include <gr_io_signature.h>
+#include <gnuradio/io_signature.h>
 
 
 specest_pad_vector_sptr
@@ -31,9 +31,9 @@ specest_make_pad_vector (size_t item_size, unsigned vlen_in, unsigned vlen_out)
 
 
 specest_pad_vector::specest_pad_vector(size_t item_size, unsigned vlen_in, unsigned vlen_out)
-	: gr_sync_block("pad_vector",
-					gr_make_io_signature(1, 1, vlen_in * item_size),
-					gr_make_io_signature(1, 1, vlen_out * item_size)),
+	: gr::sync_block("pad_vector",
+					gr::io_signature::make(1, 1, vlen_in * item_size),
+					gr::io_signature::make(1, 1, vlen_out * item_size)),
 	d_vlen_in(vlen_in), d_vlen_out(vlen_out)
 {
 	if (item_size, vlen_in < vlen_out) {

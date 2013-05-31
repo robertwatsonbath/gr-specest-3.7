@@ -22,10 +22,10 @@
 #define INCLUDED_SPECEST_WELCH_H
 
 #include <specest_api.h>
-#include <gr_hier_block2.h>
-#include <gr_fft_vcc.h>
-#include <gr_complex_to_xxx.h>
-#include <gr_firdes.h>
+#include <gnuradio/hier_block2.h>
+#include <gnuradio/fft/fft_vcc.h>
+#include <gnuradio/blocks/complex_to_mag_squared.h>
+#include <gnuradio/filter/firdes.h>
 #include <specest_stream_to_vector_overlap.h>
 #include <specest_moving_average_vff.h>
 
@@ -43,7 +43,7 @@ specest_make_welch(unsigned fft_len, int overlap, int ma_len, bool fft_shift, co
  */
 SPECEST_API specest_welch_sptr
 specest_make_welch(unsigned fft_len, int overlap = -1, int ma_len = 8, bool fft_shift = false,
-		int window_type = (int) gr_firdes::WIN_HAMMING, double beta = 6.76);
+		int window_type = (int) gr::filter::firdes::WIN_HAMMING, double beta = 6.76);
 // Declaring int instead of win_type makes it compatible with Python
 
 /**
@@ -59,7 +59,7 @@ specest_make_welch(unsigned fft_len, int overlap = -1, int ma_len = 8, bool fft_
  *
  * \ingroup specest
  */
-class SPECEST_API specest_welch : public gr_hier_block2
+class SPECEST_API specest_welch : public gr::hier_block2
 {
  private:
 	friend SPECEST_API specest_welch_sptr
@@ -74,8 +74,8 @@ class SPECEST_API specest_welch : public gr_hier_block2
 	unsigned d_fft_len;
 
 	specest_stream_to_vector_overlap_sptr d_stream_to_vector;
-	gr_fft_vcc_sptr d_fft;
-	gr_complex_to_mag_squared_sptr  d_mag_square;
+	gr::fft::fft_vcc::sptr d_fft;
+	gr::blocks::complex_to_mag_squared::sptr  d_mag_square;
 	specest_moving_average_vff_sptr d_moving_average;
 
  public:
@@ -89,7 +89,7 @@ class SPECEST_API specest_welch : public gr_hier_block2
 	/**
 	 * \brief Sets the window to the default (a Hamming window).
 	 */
-	bool set_hamming() { return set_window(gr_firdes::window(gr_firdes::WIN_HAMMING, d_fft_len, 0)); };
+	bool set_hamming() { return set_window(gr::filter::firdes::window(gr::filter::firdes::WIN_HAMMING, d_fft_len, 0)); };
 };
 
 #endif /* INCLUDED_SPECEST_WELCH_H  */

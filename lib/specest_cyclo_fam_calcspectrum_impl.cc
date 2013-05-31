@@ -35,7 +35,7 @@ specest_cyclo_fam_calcspectrum_impl::specest_cyclo_fam_calcspectrum_impl(int Np,
 
 {
     // Calculate scaling factor
-    std::vector<float> window = gr_firdes::window(gr_firdes::WIN_HAMMING, d_Np, 0);
+    std::vector<float> window = gr::filter::firdes::window(gr::filter::firdes::WIN_HAMMING, d_Np, 0);
     std::vector<float>::size_type sz = window.size();
 
     float h = 0;

@@ -22,7 +22,7 @@
 #define INCLUDED_SPECEST_CYCLO_FAM_CALCSPECTRUM_VCF_H
 
 #include <specest_api.h>
-#include <gr_sync_interpolator.h>
+#include <gnuradio/sync_interpolator.h>
 #include <specest_cyclo_fam_calcspectrum_impl.h>
 
 class specest_cyclo_fam_calcspectrum_vcf;
@@ -34,7 +34,7 @@ SPECEST_API specest_cyclo_fam_calcspectrum_vcf_sptr specest_make_cyclo_fam_calcs
  * \brief Does the heavy lifting of specest_cyclo_fam.
  *
  */
-class SPECEST_API specest_cyclo_fam_calcspectrum_vcf : public gr_sync_interpolator
+class SPECEST_API specest_cyclo_fam_calcspectrum_vcf : public gr::sync_interpolator
 {
     friend SPECEST_API specest_cyclo_fam_calcspectrum_vcf_sptr specest_make_cyclo_fam_calcspectrum_vcf (int Np, int P, int L);
 

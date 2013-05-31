@@ -22,7 +22,7 @@
 #define INCLUDED_SPECEST_PAD_VECTOR_H
 
 #include <specest_api.h>
-#include <gr_sync_block.h>
+#include <gnuradio/sync_block.h>
 
 class specest_pad_vector;
 typedef boost::shared_ptr<specest_pad_vector> specest_pad_vector_sptr;
@@ -38,7 +38,7 @@ SPECEST_API specest_make_pad_vector (size_t item_size, unsigned vlen_in, unsigne
  *
  * \ingroup specest
  */
-class SPECEST_API specest_pad_vector : public gr_sync_block
+class SPECEST_API specest_pad_vector : public gr::sync_block
 {
 	friend SPECEST_API specest_pad_vector_sptr specest_make_pad_vector (size_t item_size, unsigned vlen_in, unsigned vlen_out);
 

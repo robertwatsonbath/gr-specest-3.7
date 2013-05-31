@@ -22,7 +22,7 @@
 #define INCLUDED_SPECEST_ARBURG_VCC_H
 
 #include <specest_api.h>
-#include <gr_sync_block.h>
+#include <gnuradio/sync_block.h>
 #include <specest_arburg_impl.h>
 
 
@@ -49,7 +49,7 @@ SPECEST_API specest_make_arburg_vcc (unsigned blocklen, unsigned order, int norm
  *
  * \ingroup specest
  */
-class SPECEST_API specest_arburg_vcc : public gr_sync_block
+class SPECEST_API specest_arburg_vcc : public gr::sync_block
 {
 	friend SPECEST_API specest_arburg_vcc_sptr
 		specest_make_arburg_vcc(unsigned blocklen,

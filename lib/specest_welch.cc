@@ -24,7 +24,7 @@
 
 #include <stdexcept>
 #include <cmath>
-#include <gr_io_signature.h>
+#include <gnuradio/io_signature.h>
 #include <specest_welch.h>
 
 using std::vector;
@@ -83,21 +83,21 @@ specest_make_welch(unsigned fft_len, int overlap, int ma_len, bool fft_shift,
 		int window_type, double beta)
 {
 	vector<float> window;
-	if (window_type != gr_firdes::WIN_RECTANGULAR) {
-		vector<float> window = gr_firdes::window((gr_firdes::win_type)window_type, fft_len, beta);
+	if (window_type != gr::filter::firdes::WIN_RECTANGULAR) {
+		vector<float> window = gr::filter::firdes::window((gr::filter::firdes::win_type)window_type, fft_len, beta);
 	}
 	return specest_make_welch(fft_len, overlap, ma_len, fft_shift, window);
 }
 
 
 specest_welch::specest_welch(unsigned fft_len, int overlap, int ma_len, bool fft_shift, const vector<float> &window)
-	: gr_hier_block2("welch",
-			gr_make_io_signature(1, 1, sizeof(gr_complex)), // Input signature
-			gr_make_io_signature(1, 1, sizeof(float) * fft_len)), // Output signature
+	: gr::hier_block2("welch",
+			gr::io_signature::make(1, 1, sizeof(gr_complex)), // Input signature
+			gr::io_signature::make(1, 1, sizeof(float) * fft_len)), // Output signature
 		d_fft_len(fft_len),
 		d_stream_to_vector(specest_make_stream_to_vector_overlap(sizeof(gr_complex), fft_len, (overlap == -1) ? fft_len/2 : overlap)),
-		d_fft(gr_make_fft_vcc(fft_len, true, window, fft_shift)),
-		d_mag_square(gr_make_complex_to_mag_squared(fft_len)),
+		d_fft(gr::fft::fft_vcc::make(fft_len, true, window, fft_shift)),
+		d_mag_square(gr::blocks::complex_to_mag_squared::make(fft_len)),
 		d_moving_average(specest_make_moving_average_vff (ma_len, fft_len,
 					specest_calculate_ma_scale_impl(fft_len, ma_len, window)))
 {

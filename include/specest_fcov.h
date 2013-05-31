@@ -22,11 +22,11 @@
 #define INCLUDED_SPECEST_FCOV_H
 
 #include <specest_api.h>
-#include <gr_hier_block2.h>
-#include <gr_fft_vcc.h>
-#include <gr_complex_to_xxx.h>
-#include <gr_keep_one_in_n.h>
-#include <gr_firdes.h>
+#include <gnuradio/hier_block2.h>
+#include <gnuradio/fft/fft_vcc.h>
+#include <gnuradio/blocks/complex_to_mag_squared.h>
+#include <gnuradio/blocks/keep_one_in_n.h>
+#include <gnuradio/filter/firdes.h>
 #include <specest_reciprocal_ff.h>
 #include <specest_arfcov_vcc.h>
 #include <specest_stream_to_vector_overlap.h>
@@ -51,7 +51,7 @@ SPECEST_API specest_make_fcov(unsigned block_len, unsigned fft_len, unsigned ord
  *
  * \ingroup specest
  */
-class SPECEST_API specest_fcov : public gr_hier_block2
+class SPECEST_API specest_fcov : public gr::hier_block2
 {
  private:
 	friend SPECEST_API specest_fcov_sptr specest_make_fcov(unsigned block_len, unsigned fft_len,
@@ -68,11 +68,11 @@ class SPECEST_API specest_fcov : public gr_hier_block2
 	specest_fcov(unsigned block_len, unsigned fft_len, unsigned order, bool fftshift, int decimation);
 
 	specest_stream_to_vector_overlap_sptr d_stream_to_vector;
-	gr_keep_one_in_n_sptr d_keep_one_in_n;
+	gr::blocks::keep_one_in_n::sptr d_keep_one_in_n;
 	specest_arfcov_vcc_sptr d_arfcov;
 	specest_pad_vector_sptr d_pad_vector;
-	gr_fft_vcc_sptr d_fft;
-	gr_complex_to_mag_squared_sptr d_mag_square;
+	gr::fft::fft_vcc::sptr d_fft;
+	gr::blocks::complex_to_mag_squared::sptr d_mag_square;
 	specest_reciprocal_ff_sptr d_divide;
 
  public:

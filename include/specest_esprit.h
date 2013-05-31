@@ -22,9 +22,9 @@
 #define INCLUDED_SPECEST_ESPRIT_H
 
 #include <specest_api.h>
-#include <gr_hier_block2.h>
-#include <gr_stream_to_vector.h>
-#include <gr_keep_one_in_n.h>
+#include <gnuradio/hier_block2.h>
+#include <gnuradio/blocks/stream_to_vector.h>
+#include <gnuradio/blocks/keep_one_in_n.h>
 #include <specest_esprit_spectrum_vcf.h>
 
 class SPECEST_API specest_esprit;
@@ -43,7 +43,7 @@ SPECEST_API specest_esprit_sptr specest_make_esprit (unsigned int n, unsigned in
  * \ingroup specest
  *
  */
-class SPECEST_API specest_esprit : public gr_hier_block2
+class SPECEST_API specest_esprit : public gr::hier_block2
 {
 	friend SPECEST_API specest_esprit_sptr specest_make_esprit (unsigned int n, unsigned int m, unsigned int nsamples, unsigned int pspectrum_len, unsigned int decimation);
 
@@ -61,8 +61,8 @@ class SPECEST_API specest_esprit : public gr_hier_block2
 	unsigned int decimation();
 	void set_decimation(unsigned int n);
  private:
-	gr_stream_to_vector_sptr d_s2v;
-	gr_keep_one_in_n_sptr d_decimate;
+	gr::blocks::stream_to_vector::sptr d_s2v;
+	gr::blocks::keep_one_in_n::sptr d_decimate;
 	specest_esprit_spectrum_vcf_sptr d_esprit;
 	unsigned int d_decimation;
 };

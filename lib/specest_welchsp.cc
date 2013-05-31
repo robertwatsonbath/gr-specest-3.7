@@ -24,7 +24,7 @@
 
 #include <stdexcept>
 #include <cmath>
-#include <gr_io_signature.h>
+#include <gnuradio/io_signature.h>
 #include <specest_welchsp.h>
 
 using std::vector;
@@ -81,23 +81,23 @@ specest_make_welchsp(unsigned fft_len, int overlap, double alpha, bool fft_shift
 		int window_type, double beta)
 {
 	vector<float> window;
-	if (window_type != gr_firdes::WIN_RECTANGULAR) {
-		vector<float> window = gr_firdes::window((gr_firdes::win_type)window_type, fft_len, beta);
+	if (window_type != gr::filter::firdes::WIN_RECTANGULAR) {
+		vector<float> window = gr::filter::firdes::window((gr::filter::firdes::win_type)window_type, fft_len, beta);
 	}
 	return specest_make_welchsp(fft_len, overlap, alpha, fft_shift, window);
 }
 
 
 specest_welchsp::specest_welchsp(unsigned fft_len, int overlap, double alpha, bool fft_shift, const vector<float> &window)
-	: gr_hier_block2("welch",
-			gr_make_io_signature(1, 1, sizeof(gr_complex)), // Input signature
-			gr_make_io_signature(1, 1, sizeof(float) * fft_len)), // Output signature
+	: gr::hier_block2("welch",
+			gr::io_signature::make(1, 1, sizeof(gr_complex)), // Input signature
+			gr::io_signature::make(1, 1, sizeof(float) * fft_len)), // Output signature
 		d_fft_len(fft_len),
 		d_stream_to_vector(specest_make_stream_to_vector_overlap(sizeof(gr_complex), fft_len, (overlap == -1) ? fft_len/2 : overlap)),
-		d_fft(gr_make_fft_vcc(fft_len, true, window, fft_shift)),
-		d_mag_square(gr_make_complex_to_mag_squared(fft_len)),
-		d_moving_average(gr_make_single_pole_iir_filter_ff(alpha, fft_len)),
-		d_normalise(gr_make_multiply_const_vff(std::vector<float>(fft_len, specest_calculate_norm_factor_impl(fft_len, window))))
+		d_fft(gr::fft::fft_vcc::make(fft_len, true, window, fft_shift)),
+		d_mag_square(gr::blocks::complex_to_mag_squared::make(fft_len)),
+		d_moving_average(gr::filter::single_pole_iir_filter_ff::make(alpha, fft_len)),
+		d_normalise(gr::blocks::multiply_const_vff::make(std::vector<float>(fft_len, specest_calculate_norm_factor_impl(fft_len, window))))
 {
 	connect(self(), 0, d_stream_to_vector, 0);
 	connect(d_stream_to_vector, 0, d_fft, 0);

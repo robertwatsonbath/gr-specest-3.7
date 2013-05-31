@@ -22,7 +22,7 @@
 #define INCLUDED_SPECEST_RECIPROCAL_FF_H
 
 #include <specest_api.h>
-#include <gr_sync_block.h>
+#include <gnuradio/sync_block.h>
 #include <specest_reciprocal_ff.h>
 
 
@@ -38,7 +38,7 @@ SPECEST_API specest_make_reciprocal_ff (int vlen = 1);
  *
  * \ingroup specest
  */
-class SPECEST_API specest_reciprocal_ff : public gr_sync_block
+class SPECEST_API specest_reciprocal_ff : public gr::sync_block
 {
 	friend SPECEST_API specest_reciprocal_ff_sptr specest_make_reciprocal_ff (int vlen);
 

@@ -22,11 +22,11 @@
 #define INCLUDED_SPECEST_CYCLO_FAM_H
 
 #include <specest_api.h>
-#include <gr_hier_block2.h>
+#include <gnuradio/hier_block2.h>
 #include <specest_cyclo_fam_calcspectrum_vcf.h>
 #include <specest_stream_to_vector_overlap.h>
-#include <gr_fft_vcc.h>
-#include <gr_firdes.h>
+#include <gnuradio/fft/fft_vcc.h>
+#include <gnuradio/filter/firdes.h>
 
 class SPECEST_API specest_cyclo_fam;
 typedef boost::shared_ptr<specest_cyclo_fam> specest_cyclo_fam_sptr;
@@ -88,7 +88,7 @@ SPECEST_API specest_make_cyclo_fam (float sample_frequency, float delta_f, float
  *
  * \ingroup specest
  */
-class SPECEST_API specest_cyclo_fam : public gr_hier_block2
+class SPECEST_API specest_cyclo_fam : public gr::hier_block2
 {
 
     friend SPECEST_API specest_cyclo_fam_sptr
@@ -116,7 +116,7 @@ class SPECEST_API specest_cyclo_fam : public gr_hier_block2
 
 	//Blocks
 	specest_stream_to_vector_overlap_sptr        d_stream_to_vector;
-	gr_fft_vcc_sptr                              d_Np_fft;
+	gr::fft::fft_vcc::sptr                       d_Np_fft;
 	specest_cyclo_fam_calcspectrum_vcf_sptr      d_calcspectrum;
 
 	float d_fs;

@@ -23,7 +23,7 @@
 
 #include <stdexcept>
 #include <cmath>
-#include <gr_io_signature.h>
+#include <gnuradio/io_signature.h>
 #include <specest_fmcov.h>
 
 using std::vector;
@@ -53,15 +53,15 @@ specest_make_fmcov(unsigned int block_len, unsigned int fft_len, unsigned int or
 
 
 specest_fmcov::specest_fmcov(unsigned block_len, unsigned fft_len, unsigned order, bool fftshift, int decimation)
-	: gr_hier_block2("fmcov",
-			gr_make_io_signature(1, 1, sizeof(gr_complex)), // Input signature
-			gr_make_io_signature(1, 1, sizeof(float)*fft_len)), // Output signature
+	: gr::hier_block2("fmcov",
+			gr::io_signature::make(1, 1, sizeof(gr_complex)), // Input signature
+			gr::io_signature::make(1, 1, sizeof(float)*fft_len)), // Output signature
 	d_stream_to_vector(specest_make_stream_to_vector_overlap(sizeof(gr_complex), block_len, 0)),
-	d_keep_one_in_n(gr_make_keep_one_in_n(sizeof(gr_complex) * block_len, decimation)),
+	d_keep_one_in_n(gr::blocks::keep_one_in_n::make(sizeof(gr_complex) * block_len, decimation)),
 	d_arfmcov(specest_make_arfmcov_vcc(block_len, order, fft_len)),
 	d_pad_vector(specest_make_pad_vector(sizeof(gr_complex), order+1, fft_len)),
-	d_fft(gr_make_fft_vcc(fft_len, true, gr_firdes::window(gr_firdes::WIN_RECTANGULAR, fft_len, 1), fftshift)),
-	d_mag_square(gr_make_complex_to_mag_squared(fft_len)),
+	d_fft(gr::fft::fft_vcc::make(fft_len, true, gr::filter::firdes::window(gr::filter::firdes::WIN_RECTANGULAR, fft_len, 1), fftshift)),
+	d_mag_square(gr::blocks::complex_to_mag_squared::make(fft_len)),
 	d_divide(specest_make_reciprocal_ff(fft_len))
 {
 	connect(self(), 0, d_stream_to_vector, 0);

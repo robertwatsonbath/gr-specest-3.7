@@ -23,7 +23,7 @@
 #endif
 
 #include <specest_arfcov_vcc.h>
-#include <gr_io_signature.h>
+#include <gnuradio/io_signature.h>
 #include <stdexcept>
 #include <cstring>
 #include <iostream>
@@ -40,9 +40,9 @@ specest_make_arfcov_vcc (unsigned blocklen, unsigned order, int normalise)
 
 
 specest_arfcov_vcc::specest_arfcov_vcc (unsigned blocklen, unsigned order, int normalise)
-	: gr_sync_block ("arfcov_vcc",
-			gr_make_io_signature (1, 1, blocklen * sizeof(gr_complex)),
-			gr_make_io_signature2 (1, 2, (order+1) * sizeof(gr_complex), sizeof(float))),
+	: gr::sync_block ("arfcov_vcc",
+			gr::io_signature::make (1, 1, blocklen * sizeof(gr_complex)),
+			gr::io_signature::make2 (1, 2, (order+1) * sizeof(gr_complex), sizeof(float))),
 	d_blocklen(blocklen), d_order(order), d_normalise(normalise)
 {
 	// TODO catch?

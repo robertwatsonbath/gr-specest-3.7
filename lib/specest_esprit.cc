@@ -22,7 +22,7 @@
 #include "config.h"
 #endif
 
-#include <gr_io_signature.h>
+#include <gnuradio/io_signature.h>
 #include <specest_esprit.h>
 
 
@@ -34,12 +34,12 @@ specest_make_esprit (unsigned int n, unsigned int m, unsigned int nsamples, unsi
 
 
 specest_esprit::specest_esprit (unsigned int n, unsigned int m, unsigned int nsamples, unsigned int pspectrum_len, unsigned int decimation)
-	: gr_hier_block2 ("esprit",
-		gr_make_io_signature (1, 1, sizeof (gr_complex)),
-		gr_make_io_signature (1, 1, pspectrum_len * sizeof (float))),
+	: gr::hier_block2 ("esprit",
+		gr::io_signature::make (1, 1, sizeof (gr_complex)),
+		gr::io_signature::make (1, 1, pspectrum_len * sizeof (float))),
 		d_decimation(decimation),
-		d_s2v(gr_make_stream_to_vector(sizeof(gr_complex),nsamples)),
-		d_decimate(gr_make_keep_one_in_n(nsamples * sizeof(gr_complex), decimation)),
+		d_s2v(gr::blocks::stream_to_vector::make(sizeof(gr_complex),nsamples)),
+		d_decimate(gr::blocks::keep_one_in_n::make(nsamples * sizeof(gr_complex), decimation)),
 		d_esprit(specest_make_esprit_spectrum_vcf(n,m,nsamples,pspectrum_len))
 
 {

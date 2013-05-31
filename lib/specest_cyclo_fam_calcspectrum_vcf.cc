@@ -22,7 +22,7 @@
 #include "config.h"
 #endif
 
-#include <gr_io_signature.h>
+#include <gnuradio/io_signature.h>
 #include <specest_cyclo_fam_calcspectrum_vcf.h>
 
 
@@ -34,9 +34,9 @@ specest_make_cyclo_fam_calcspectrum_vcf (int Np, int P, int L)
 
 
 specest_cyclo_fam_calcspectrum_vcf::specest_cyclo_fam_calcspectrum_vcf (int Np, int P, int L)
-    :gr_sync_interpolator ("cyclo_fam_calcspectrum_vcf",
-     gr_make_io_signature (1, 1, sizeof (gr_complex)*Np),
-     gr_make_io_signature (1, 1, sizeof (float)*(2*Np)), 2*L),
+    :gr::sync_interpolator ("cyclo_fam_calcspectrum_vcf",
+     gr::io_signature::make (1, 1, sizeof (gr_complex)*Np),
+     gr::io_signature::make (1, 1, sizeof (float)*(2*Np)), 2*L),
      d_Np(Np),
      d_P(P),
      d_N(P*L),

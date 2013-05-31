@@ -22,12 +22,12 @@
 #define INCLUDED_SPECEST_WELCHSP_H
 
 #include <specest_api.h>
-#include <gr_hier_block2.h>
-#include <gr_fft_vcc.h>
-#include <gr_complex_to_xxx.h>
-#include <gr_firdes.h>
-#include <gr_single_pole_iir_filter_ff.h>
-#include <gr_multiply_const_vff.h>
+#include <gnuradio/hier_block2.h>
+#include <gnuradio/fft/fft_vcc.h>
+#include <gnuradio/blocks/complex_to_mag_squared.h>
+#include <gnuradio/filter/firdes.h>
+#include <gnuradio/filter/single_pole_iir_filter_ff.h>
+#include <gnuradio/blocks/multiply_const_vff.h>
 #include <specest_stream_to_vector_overlap.h>
 
 class SPECEST_API specest_welchsp;
@@ -45,7 +45,7 @@ SPECEST_API specest_make_welchsp(unsigned fft_len, int overlap, double alpha,
  */
 SPECEST_API specest_welchsp_sptr
 SPECEST_API specest_make_welchsp(unsigned fft_len, int overlap = -1, double alpha = .1, bool fft_shift = false,
-		int window_type = (int) gr_firdes::WIN_HAMMING, double beta = 6.76);
+		int window_type = (int) gr::filter::firdes::WIN_HAMMING, double beta = 6.76);
 // Declaring int instead of win_type makes it compatible with Python
 
 /**
@@ -57,7 +57,7 @@ SPECEST_API specest_make_welchsp(unsigned fft_len, int overlap = -1, double alph
  *
  * \ingroup specest
  */
-class SPECEST_API specest_welchsp : public gr_hier_block2
+class SPECEST_API specest_welchsp : public gr::hier_block2
 {
  private:
 	friend SPECEST_API specest_welchsp_sptr
@@ -72,10 +72,10 @@ class SPECEST_API specest_welchsp : public gr_hier_block2
 	unsigned d_fft_len;
 
 	specest_stream_to_vector_overlap_sptr d_stream_to_vector;
-	gr_fft_vcc_sptr d_fft;
-	gr_complex_to_mag_squared_sptr  d_mag_square;
-	gr_single_pole_iir_filter_ff_sptr d_moving_average;
-	gr_multiply_const_vff_sptr d_normalise;
+	gr::fft::fft_vcc::sptr d_fft;
+	gr::blocks::complex_to_mag_squared::sptr  d_mag_square;
+	gr::filter::single_pole_iir_filter_ff::sptr d_moving_average;
+	gr::blocks::multiply_const_vff::sptr d_normalise;
 
  public:
         ~specest_welchsp();
@@ -88,7 +88,7 @@ class SPECEST_API specest_welchsp : public gr_hier_block2
 	/**
 	 * \brief Sets the window to the default (a Hamming window).
 	 */
-	bool set_hamming() { return set_window(gr_firdes::window(gr_firdes::WIN_HAMMING, d_fft_len, 0)); };
+	bool set_hamming() { return set_window(gr::filter::firdes::window(gr::filter::firdes::WIN_HAMMING, d_fft_len, 0)); };
 };
 
 #endif /* INCLUDED_SPECEST_WELCHSP_H */

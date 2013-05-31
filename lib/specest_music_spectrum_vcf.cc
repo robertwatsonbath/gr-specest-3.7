@@ -22,7 +22,7 @@
 #include "config.h"
 #endif
 
-#include <gr_io_signature.h>
+#include <gnuradio/io_signature.h>
 #include <specest_music_spectrum_vcf.h>
 #include <specest_music_armadillo_impl.h>
 
@@ -35,9 +35,9 @@ specest_make_music_spectrum_vcf (unsigned int n, unsigned int m, unsigned int ns
 
 
 specest_music_spectrum_vcf::specest_music_spectrum_vcf (unsigned int n, unsigned int m, unsigned int nsamples, unsigned int pspectrum_len)
-	: gr_sync_block ("music_spectrum_vcf",
-		gr_make_io_signature (1, 1, sizeof (gr_complex) * nsamples),
-		gr_make_io_signature (1, 1, sizeof (float) * pspectrum_len)),
+	: gr::sync_block ("music_spectrum_vcf",
+		gr::io_signature::make (1, 1, sizeof (gr_complex) * nsamples),
+		gr::io_signature::make (1, 1, sizeof (float) * pspectrum_len)),
 		d_m(m),
 		d_n(n),
 		d_nsamples(nsamples),
