@@ -24,7 +24,8 @@ from __future__ import division
 ##################################################
 # Imports
 ##################################################
-from gnuradio import gr, blks2
+from gnuradio import gr
+from gnuradio import blocks
 from gnuradio.wxgui import common
 from gnuradio.wxgui.pubsub import pubsub
 from gnuradio.wxgui.constants import *

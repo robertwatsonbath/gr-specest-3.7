@@ -1,4 +1,5 @@
 from gnuradio import gr, gr_unittest
+from gnuradio import blocks, analog
 import numpy
 import os
 
@@ -29,15 +30,15 @@ class signal_generator(gr.hier_block2):
         self.samp_rate = samp_rate
         # create our signals ...
         for s in range(n_sinusoids):
-            self.srcs.append(gr.sig_source_c(samp_rate,
-                gr.GR_SIN_WAVE,1000 * s + 2000,
+            self.srcs.append(analog.sig_source_c(samp_rate,
+                analog.GR_SIN_WAVE,1000 * s + 2000,
                 numpy.sqrt(sigampl/n_sinusoids)))
 
         seed = ord(os.urandom(1))
-        self.noise = gr.noise_source_c(gr.GR_GAUSSIAN, 1, seed)
-        self.add = gr.add_cc()
-        self.head = gr.head(gr.sizeof_gr_complex, nsamples)
-        self.sink = gr.vector_sink_f(vlen=n_sinusoids)
+        self.noise = analog.noise_source_c(analog.GR_GAUSSIAN, 1, seed)
+        self.add = blocks.add_cc()
+        self.head = blocks.head(gr.sizeof_gr_complex, nsamples)
+        self.sink = blocks.vector_sink_f(vlen=n_sinusoids)
         # wire it up ...
         for s in range(n_sinusoids):
             self.connect(self.srcs[s], (self.add, s))

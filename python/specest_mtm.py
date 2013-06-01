@@ -18,7 +18,8 @@
 # Boston, MA 02110-1301, USA.
 #
 
-from gnuradio import gr, window
+from gnuradio import gr
+from gnuradio blocks, fft
 import specest_gendpss
 import specest_swig
 
@@ -93,7 +94,7 @@ class eigenspectrum(gr.hier_block2):
                 gr.io_signature(1, 1, gr.sizeof_gr_complex*len(dpss)),
                 gr.io_signature(1, 1, gr.sizeof_float*len(dpss)))
         self.window = dpss
-        self.fft = gr.fft_vcc(len(dpss), True, self.window, fftshift)
-        self.c2mag = gr.complex_to_mag_squared(len(dpss))
+        self.fft = fft.fft_vcc(len(dpss), True, self.window, fftshift)
+        self.c2mag = blocks.complex_to_mag_squared(len(dpss))
         self.connect(self, self.fft, self.c2mag, self)
 

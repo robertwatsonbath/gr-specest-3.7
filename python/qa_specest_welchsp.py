@@ -20,6 +20,7 @@
 #
 
 from gnuradio import gr, gr_unittest
+from gnuradio import blocks
 import specest_swig as specest
 from numpy import *
 
@@ -44,9 +45,9 @@ class test_specest_welchsp(gr_unittest.TestCase):
         window = hamming(fft_len)
 
         src_data = (1,) * (100 * fft_len)
-        src = gr.vector_source_c(src_data, False)
+        src = blocks.vector_source_c(src_data, False)
         welch = specest.welchsp(fft_len, overlap, alpha, False, window)
-        sink = gr.vector_sink_f(fft_len)
+        sink = blocks.vector_sink_f(fft_len)
 
         self.tb.connect(src, welch, sink)
         self.tb.run()
@@ -65,9 +66,9 @@ class test_specest_welchsp(gr_unittest.TestCase):
         fft_len = 1024
 
         src_data = (1,) * (100* fft_len)
-        src = gr.vector_source_c(src_data, False)
+        src = blocks.vector_source_c(src_data, False)
         welch = specest.welchsp(fft_len)
-        sink = gr.vector_sink_f(fft_len)
+        sink = blocks.vector_sink_f(fft_len)
 
         self.tb.connect(src, welch, sink)
         self.tb.run()

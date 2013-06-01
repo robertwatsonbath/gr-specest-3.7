@@ -20,6 +20,7 @@
 #
 
 from gnuradio import gr, gr_unittest, eng_notation
+from gnuradio import blocks, analog
 import specest_swig as specest
 import numpy
 import signal_generator as siggen
@@ -47,9 +48,9 @@ class qa_esprit_vcf (gr_unittest.TestCase):
                                               SNR = SNR, samp_rate = samp_rate,
                                               nsamples = nsamples)
 
-        self.stream = gr.stream_to_vector(gr.sizeof_gr_complex, nsamples)
+        self.stream = blocks.stream_to_vector(gr.sizeof_gr_complex, nsamples)
         self.esprit = specest.esprit_vcf(n=n_sinusoids, m=100, nsamples = nsamples)
-        self.sink = gr.vector_sink_f(vlen=n_sinusoids)
+        self.sink = blocks.vector_sink_f(vlen=n_sinusoids)
         # wire it up ...
         self.tb.connect(self.siggen, self.stream, self.esprit, self.sink)
         for i in range(100):
@@ -70,9 +71,9 @@ class qa_esprit_vcf (gr_unittest.TestCase):
                                               SNR = SNR, samp_rate = samp_rate,
                                               nsamples = nsamples * n_trials)
 
-        self.stream = gr.stream_to_vector(gr.sizeof_gr_complex, nsamples)
+        self.stream = blocks.stream_to_vector(gr.sizeof_gr_complex, nsamples)
         self.esprit = specest.esprit_vcf(n=1, m=64, nsamples = nsamples)
-        self.sink = gr.vector_sink_f(vlen=1)
+        self.sink = blocks.vector_sink_f(vlen=1)
         # wire it up ...
         self.tb.connect(self.siggen, self.stream, self.esprit, self.sink)
         self.tb.run()

@@ -19,6 +19,7 @@
 #
 
 from gnuradio import gr, gr_unittest
+from gnuradio import analog, blocks
 import specest_swig as specest
 import numpy
 
@@ -52,10 +53,10 @@ class test_specest_cyclo_fam (gr_unittest.TestCase):
         Np = 4
         P = 4
         L = 2
-        src = gr.vector_source_c(src_data, False)
+        src = blocks.vector_source_c(src_data, False)
         cyclo_fam = specest.cyclo_fam(Np, P, L)
 
-        sink = gr.vector_sink_f(2*Np)
+        sink = blocks.vector_sink_f(2*Np)
         self.tb.connect(src, cyclo_fam, sink)
         self.tb.run()
         estimated_data =  sink.data()[-2*P*L*(2*Np):]
@@ -67,10 +68,10 @@ class test_specest_cyclo_fam (gr_unittest.TestCase):
         Np = 128
         P = 512
         L = 4
-        src = gr.noise_source_c(gr.GR_GAUSSIAN, 1)
-        head = gr.head(gr.sizeof_gr_complex, P * L)
+        src = analog.noise_source_c(analog.GR_GAUSSIAN, 1)
+        head = blocks.head(gr.sizeof_gr_complex, P * L)
         cyclo_fam  = specest.cyclo_fam (Np,P,L)
-        dst = gr.vector_sink_f(2*Np)
+        dst = blocks.vector_sink_f(2*Np)
         self.tb.connect(src, head, cyclo_fam, dst)
         try:
             self.tb.run()

@@ -19,7 +19,8 @@
 # Boston, MA 02110-1301, USA.
 #
 
-from gnuradio import gr, window, blks2
+from gnuradio import gr
+from gnuradio import blocks
 import math
 import specest
 

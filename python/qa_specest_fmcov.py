@@ -19,6 +19,7 @@
 #
 
 from gnuradio import gr, gr_unittest
+from gnuradio import blocks, analog
 import specest_swig as specest
 import numpy
 
@@ -101,10 +102,10 @@ class test_specest_fmcov(gr_unittest.TestCase):
     def test_001_noiseprocess (self):
         """  Calculate coefficients of known signal and compare w/ precalculated results.
         We run the test twice to make sure no residual stuff affects calculation. """
-        src = gr.vector_source_c(test_sig * 2, False, len(test_sig))
+        src = blocks.vector_source_c(test_sig * 2, False, len(test_sig))
         fmcov = specest.arfmcov_vcc(len(test_sig), len(test_sig_coeffs) - 1)
-        dst_coeffs = gr.vector_sink_c(len(test_sig_coeffs))
-        dst_var = gr.vector_sink_f()
+        dst_coeffs = blocks.vector_sink_c(len(test_sig_coeffs))
+        dst_var = blocks.vector_sink_f()
 
         self.tb.connect(src, fmcov, dst_coeffs)
         self.tb.connect((fmcov, 1), dst_var)
@@ -123,10 +124,10 @@ class test_specest_fmcov(gr_unittest.TestCase):
         order = 6
         n_blocks = 100
 
-        src = gr.noise_source_c(gr.GR_GAUSSIAN, 1)
-        head = gr.head(gr.sizeof_gr_complex, n_blocks * block_len)
+        src = analog.noise_source_c(analog.GR_GAUSSIAN, 1)
+        head = blocks.head(gr.sizeof_gr_complex, n_blocks * block_len)
         fmcov = specest.fmcov(block_len, fft_len, order)
-        dst = gr.vector_sink_f(fft_len)
+        dst = blocks.vector_sink_f(fft_len)
 
         self.tb.connect(src, head, fmcov, dst)
         try:

@@ -31,7 +31,7 @@ matplotlib.use('GTKAgg')
 import matplotlib.pylab as plt
 from gnuradio import gr
 
-import specest
+import specest_swig as specest
 
 class FAMProcessor(gr.top_block):
     """ Simple flow graph: run file through FAM.
