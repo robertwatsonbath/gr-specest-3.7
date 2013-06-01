@@ -23,7 +23,7 @@
 #include <stdexcept>
 #include <iostream>
 #include <iomanip>
-#include <gr_complex.h>
+#include <gnuradio/gr_complex.h>
 #include <boost/test/unit_test.hpp>
 #include <specest_cyclo_fam_calcspectrum_impl.h>
 
