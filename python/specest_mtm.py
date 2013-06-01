@@ -19,7 +19,7 @@
 #
 
 from gnuradio import gr
-from gnuradio blocks, fft
+from gnuradio import blocks, fft
 import specest_gendpss
 import specest_swig
 
