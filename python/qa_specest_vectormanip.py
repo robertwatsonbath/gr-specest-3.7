@@ -19,6 +19,7 @@
 #
 
 from gnuradio import gr, gr_unittest
+from gnuradio import blocks
 import specest_swig as specest
 from numpy import *
 
@@ -34,9 +35,9 @@ class test_vectormanip(gr_unittest.TestCase):
         expected_data = tuple(list((0,) * 4) + range(4) + range(0, 8) + range(4, 12) + range(8, 16))
         vlen = 8
 
-        src = gr.vector_source_i(src_data, False)
+        src = blocks.vector_source_i(src_data, False)
         s2v = specest.stream_to_vector_overlap(gr.sizeof_int, vlen, 4)
-        dst = gr.vector_sink_i(vlen)
+        dst = blocks.vector_sink_i(vlen)
 
         self.tb.connect(src, s2v, dst)
         self.tb.run()
@@ -50,9 +51,9 @@ class test_vectormanip(gr_unittest.TestCase):
         src_data = (1,) * vlen
         expected_data = (1,) * 8 + (0,) * vlen
 
-        src = gr.vector_source_f(src_data, False, vlen)
+        src = blocks.vector_source_f(src_data, False, vlen)
         s2v = specest.pad_vector(gr.sizeof_float, vlen, 2*vlen)
-        dst = gr.vector_sink_f(2*vlen)
+        dst = blocks.vector_sink_f(2*vlen)
 
         self.tb.connect(src, s2v, dst)
         self.tb.run()
@@ -66,9 +67,9 @@ class test_vectormanip(gr_unittest.TestCase):
         src_data = (2,) * vlen
         expected_data = (0.5,) * vlen
 
-        src = gr.vector_source_f(src_data, False, vlen)
+        src = blocks.vector_source_f(src_data, False, vlen)
         recip = specest.reciprocal_ff(vlen)
-        dst = gr.vector_sink_f(vlen)
+        dst = blocks.vector_sink_f(vlen)
 
         self.tb.connect(src, recip, dst)
         self.tb.run()

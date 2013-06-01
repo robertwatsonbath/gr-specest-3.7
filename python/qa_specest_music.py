@@ -18,6 +18,7 @@
 # Boston, MA 02110-1301, USA.
 
 from gnuradio import gr, gr_unittest
+from gnuradio import blocks
 import specest_swig as specest
 import signal_generator as siggen
 
@@ -43,7 +44,7 @@ class qa_music (gr_unittest.TestCase):
                                               SNR = 20, samp_rate = 32e3,
                                               nsamples = input_len)
         self.music = specest.music(n, m, nsamples, pspectrum_len, decimation)
-        self.sink = gr.vector_sink_f(vlen=pspectrum_len)
+        self.sink = blocks.vector_sink_f(vlen=pspectrum_len)
         self.tb.connect(self.siggen, self.music, self.sink)
         self.tb.run ()
         self.assertEqual(len(self.sink.data()), input_len / nsamples / decimation * pspectrum_len)
@@ -65,7 +66,7 @@ class qa_music (gr_unittest.TestCase):
         self.assertEqual(self.music.decimation(), 1)
         self.music.set_decimation(2)
         self.assertEqual(self.music.decimation(), 2)
-        self.sink = gr.vector_sink_f(vlen=pspectrum_len)
+        self.sink = blocks.vector_sink_f(vlen=pspectrum_len)
         self.tb.connect(self.siggen, self.music, self.sink)
         self.tb.run ()
         self.assertEqual(len(self.sink.data()), input_len / nsamples / 2 * pspectrum_len)
