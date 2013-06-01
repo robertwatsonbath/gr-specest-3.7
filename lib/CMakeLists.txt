@@ -83,8 +83,10 @@ target_link_libraries(gnuradio-specest
     gnuradio-specest-fortran
     ${ARMADILLO_LIBRARIES}
     ${Boost_LIBRARIES}
-    ${GRUEL_LIBRARIES}
-    ${GNURADIO_CORE_LIBRARIES}
+    ${GNURADIO_RUNTIME_LIBRARIES}
+    ${GNURADIO_BLOCKS_LIBRARIES}
+    ${GNURADIO_FILTER_LIBRARIES}
+    ${GNURADIO_FFT_LIBRARIES}
 )
 set_target_properties(gnuradio-specest
     PROPERTIES DEFINE_SYMBOL "gnuradio_specest_EXPORTS"

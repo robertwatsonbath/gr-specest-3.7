@@ -23,7 +23,7 @@
 #include <algorithm>
 #include <stdexcept>
 #include <boost/test/unit_test.hpp>
-#include <gr_complex.h>
+#include <gnuradio/gr_complex.h>
 #include <specest_esprit_fortran_impl.h>
 
 class esprit_fortran_impl_test

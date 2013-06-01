@@ -93,7 +93,7 @@ set(GRC_BLOCKS_DIR      ${GR_PKG_DATA_DIR}/grc/blocks)
 ########################################################################
 # Find gnuradio build dependencies
 ########################################################################
-set(GR_REQUIRED_COMPONENTS RUNTIME BLOCKS FFT)
+set(GR_REQUIRED_COMPONENTS RUNTIME BLOCKS FILTER FFT)
 find_package(Gnuradio "3.7.0")
 
 if(NOT GNURADIO_RUNTIME_FOUND)
@@ -125,6 +125,7 @@ ENDIF(ARMADILLO_FOUND)
 ########################################################################
 include_directories(
     ${CMAKE_SOURCE_DIR}/include
+    ${CMAKE_SOURCE_DIR}/lib
     ${Boost_INCLUDE_DIRS}
     ${GNURADIO_RUNTIME_INCLUDE_DIRS}
 )
