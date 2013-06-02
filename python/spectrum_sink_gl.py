@@ -25,7 +25,7 @@ from __future__ import division
 # Imports
 ##################################################
 from gnuradio import gr
-from gnuradio import blocks
+from gnuradio import blocks, analog
 from gnuradio.wxgui import common
 from gnuradio.wxgui.pubsub import pubsub
 from gnuradio.wxgui.constants import *
@@ -97,7 +97,7 @@ class _spectrum_sink_base(gr.hier_block2, common.wxgui_hb):
             estimator = estimator
 		)
 		msgq = gr.msg_queue(2)
-		sink = gr.message_sink(gr.sizeof_float*pspectrum_len, msgq, True)
+		sink = blocks.message_sink(gr.sizeof_float*pspectrum_len, msgq, True)
 
 		#controller
 		self.controller = pubsub()
@@ -162,25 +162,25 @@ class test_app_block (stdgui2.std_top_block):
         input_rate = 2e6
 
         #Generate some noise
-        noise = gr.noise_source_c(gr.GR_GAUSSIAN, 1.0/10)
+        noise = analog.noise_source_c(analog.GR_GAUSSIAN, 1.0/10)
 
         # Generate a complex sinusoid
-        #source = gr.file_source(gr.sizeof_gr_complex, 'foobar2.dat', repeat=True)
+        #source = blocks.file_source(gr.sizeof_gr_complex, 'foobar2.dat', repeat=True)
 
-        src1 = gr.sig_source_c (input_rate, gr.GR_SIN_WAVE, -500e3, 1)
-        src2 = gr.sig_source_c (input_rate, gr.GR_SIN_WAVE, 500e3, 1)
-        src3 = gr.sig_source_c (input_rate, gr.GR_SIN_WAVE, -250e3, 2)
+        src1 = analog.sig_source_c (input_rate, analog.GR_SIN_WAVE, -500e3, 1)
+        src2 = analog.sig_source_c (input_rate, analog.GR_SIN_WAVE, 500e3, 1)
+        src3 = analog.sig_source_c (input_rate, analog.GR_SIN_WAVE, -250e3, 2)
 
         # We add these throttle blocks so that this demo doesn't
         # suck down all the CPU available.  Normally you wouldn't use these.
-        thr1 = gr.throttle(gr.sizeof_gr_complex, input_rate)
+        thr1 = blocks.throttle(gr.sizeof_gr_complex, input_rate)
 
         sink1 = spectrum_sink_c (panel, title="Spectrum Sink", pspectrum_len=pspectrum_len,
                             sample_rate=input_rate, baseband_freq=0,
                             ref_level=0, y_per_div=20, y_divs=10, m = 70, n = 3, nsamples = 1024)
         vbox.Add (sink1.win, 1, wx.EXPAND)
 
-        combine1=gr.add_cc()
+        combine1=blocks.add_cc()
         self.connect(src1,(combine1,0))
         self.connect(src2,(combine1,1))
         self.connect(src3,(combine1,2))

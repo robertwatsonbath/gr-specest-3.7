@@ -20,7 +20,7 @@
 #
 
 from gnuradio import gr
-from gnuradio import blocks
+from gnuradio import blocks, filter
 import math
 import specest
 
@@ -48,7 +48,7 @@ class _logpwrspectrum_base(gr.hier_block2):
                                 gr.io_signature(1, 1, self._item_size),          # Input signature
                                 gr.io_signature(1, 1, gr.sizeof_float*pspectrum_len)) # Output signature
 
-        self._sd = blks2.stream_to_vector_decimator(item_size=self._item_size,
+        self._sd = blocks.stream_to_vector_decimator(item_size=self._item_size,
                                               sample_rate=sample_rate,
                                               vec_rate=frame_rate,
                                               vec_len=nsamples)
@@ -63,8 +63,8 @@ class _logpwrspectrum_base(gr.hier_block2):
             est = specest.esprit_spectrum_vcf(n,m,nsamples,pspectrum_len)
 
 
-        self._avg = gr.single_pole_iir_filter_ff(1.0, pspectrum_len)
-        self._log = gr.nlog10_ff(20, pspectrum_len,
+        self._avg = filter.single_pole_iir_filter_ff(1.0, pspectrum_len)
+        self._log = blocks.nlog10_ff(20, pspectrum_len,
                                  -20*math.log10(pspectrum_len)              # Adjust for number of bins
                                  -20*math.log10(ref_scale/2)+3.0)      # Adjust for reference scale
         self.connect(self, self._sd, est, self._avg, self._log, self)

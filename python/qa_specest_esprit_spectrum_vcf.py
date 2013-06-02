@@ -65,7 +65,7 @@ class qa_esprit_spectrum_vcf (gr_unittest.TestCase):
         #pspectrum_len = 512
         #fcenter = 1.8e9
 
-        #self.source = gr.file_source(gr.sizeof_gr_complex, 'foobar2.dat', repeat=False)
+        #self.source = blocks.file_source(gr.sizeof_gr_complex, 'foobar2.dat', repeat=False)
         #self.stream = blocks.stream_to_vector(gr.sizeof_gr_complex, nsamples)
         #self.esprit = specest.esprit_spectrum_vcf(n=n_sinusoids, m=100, nsamples = nsamples, pspectrum_len = pspectrum_len)
         #self.sink = blocks.vector_sink_f(vlen=pspectrum_len)

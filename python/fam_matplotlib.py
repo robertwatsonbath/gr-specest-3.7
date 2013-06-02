@@ -30,6 +30,7 @@ import matplotlib
 matplotlib.use('GTKAgg')
 import matplotlib.pylab as plt
 from gnuradio import gr
+from gnuradio import blocks, analog
 
 import specest_swig as specest
 
@@ -40,15 +41,15 @@ class FAMProcessor(gr.top_block):
                  filename=None, sample_type='complex', verbose=True):
         gr.top_block.__init__(self)
         if filename is None:
-            src = gr.noise_source_c(gr.GR_GAUSSIAN, 1)
+            src = analog.noise_source_c(analog.GR_GAUSSIAN, 1)
             if verbose:
                 print "Using Gaussian noise source."
         else:
             if sample_type == 'complex':
-                src = gr.file_source(gr.sizeof_gr_complex, filename, True)
+                src = blocks.file_source(gr.sizeof_gr_complex, filename, True)
             else:
-                fsrc = gr.file_source(gr.sizeof_float, filename, True)
-                src = gr.float_to_complex()
+                fsrc = blocks.file_source(gr.sizeof_float, filename, True)
+                src = blocks.float_to_complex()
                 self.connect(fsrc, src)
             if verbose:
                 print "Reading data from %s" % filename
@@ -58,7 +59,7 @@ class FAMProcessor(gr.top_block):
             print "P    = %d" % P
             print "L    = %d" % L
             #print "Δf   = %f" % asfd
-        sink = gr.null_sink(gr.sizeof_float * 2 * Np)
+        sink = blocks.null_sink(gr.sizeof_float * 2 * Np)
         self.cyclo_fam = specest.cyclo_fam(Np, P, L)
         self.connect(src, self.cyclo_fam, sink)
 
