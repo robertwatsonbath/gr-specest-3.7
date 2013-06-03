@@ -23,7 +23,7 @@
 #include <fstream>
 #include <stdexcept>
 #include <boost/test/unit_test.hpp>
-#include <gr_complex.h>
+#include <gnuradio/gr_complex.h>
 #include <specest_music_fortran_impl.h>
 
 class music_fortran_impl_test
