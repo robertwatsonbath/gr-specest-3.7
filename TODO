@@ -1,0 +1,10 @@
+make test fails for following, need to investigate...
+RJW
+
+
+The following tests FAILED:
+	  6 - qa_specest_cyclo_fam (Failed)
+	 13 - qa_specest_mtm (Failed)
+	 16 - qa_specest_welch (Failed)
+	 17 - qa_specest_welchsp (Failed)
+

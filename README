@@ -3,7 +3,7 @@ Howto build:
 In order to sucessfully build the gr-specest modules you will need:
 * cmake > 2.8
 * swig
-* libgnuradio-core
+* libgnuradio-core // GNURadio 3.7 API needs libgnuradio-runtime
 * libuhd
 * gfortran (others might work as well, not tested)
 * liblapack-dev
